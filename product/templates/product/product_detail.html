@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-4 mb-4 text-center">
+            <h3>{{product.title}}</h3>
+        </div>
+        <div class="col-3">
+            <img src="{{product.image.url}}" class="img-fluid mx-auto d-block" alt="...">
+        </div>
+        <div class="col-6">
+            <ul>
+                <li><h4>{{ product.title }}</h4></li>
+                <li>{{ product.brand }}</li>
+                <li>{{ product.description }}</li>
+                <li>{{ product.price }}</li>
+                <li>{{ product.available }}</li>
+                <li id="pr-amount">{{ product.amount }}</li>
+            </ul>
+            <div class="col">
+                <div class="row p-3">
+                    <div class="col-6">
+                        <label for="select">Qty</label>&nbsp;
+                        <select id="select">
+
+                        </select>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" id="add-button" value="{{product.id}}"
+                                class="btn btn-secondary btn-sm">
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var select = $('#pr-amount').text()
+        var x = {{ product.amount }}
+        for(var i=1; i<select; i+=1){
+            console.log(i)
+            $('select').append(`<option value="${i}">${i}</option>`);
+        };
+        $('select').append(`<option value="${x}">${x}</option>`);
+    });
+</script>
+</html>
