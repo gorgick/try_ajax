@@ -54,6 +54,28 @@
             $('select').append(`<option value="${i}">${i}</option>`);
         };
         $('select').append(`<option value="${x}">${x}</option>`);
+
+
+        $('#add-button').click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "product:add-to-cart" %}',
+                data: {
+                    product_id: $(this).val(),
+                    product_qty: $('#select option:selected').text(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        });
     });
 </script>
 </html>
