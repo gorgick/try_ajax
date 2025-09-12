@@ -14,3 +14,4 @@ class Cart:
         if product_id not in self.__dict__['cart']:
             self.__dict__['cart'][product_id] = {'qty': product_qty, 'price': str(product.price)}
         self.__dict__['cart'][product_id]['qty'] = product_qty
+        self.session.modified = True
