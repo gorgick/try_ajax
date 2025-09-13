@@ -15,3 +15,6 @@ class Cart:
             self.__dict__['cart'][product_id] = {'qty': product_qty, 'price': str(product.price)}
         self.__dict__['cart'][product_id]['qty'] = product_qty
         self.session.modified = True
+        product_amount = product.amount - product_qty
+        product.amount = product_amount
+        product.save()
