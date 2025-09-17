@@ -8,13 +8,20 @@ class Cart:
             cart = self.session['session_key'] = {}
         self.cart = cart
 
+    def __iter__(self):
+        for x in self.cart:
+            yield self.cart[x]
+
     def add(self, product, product_qty):
         product_id = str(product.id)
         product_qty = product_qty
         if product_id not in self.__dict__['cart']:
-            self.__dict__['cart'][product_id] = {'qty': product_qty, 'price': str(product.price)}
-        self.__dict__['cart'][product_id]['qty'] = product_qty
+            self.__dict__['cart'][product_id] = {'qty': str(product_qty), 'price': str(product.price),
+                                                 'title': product.title}
+        else:
+            self.__dict__['cart'][product_id]['qty'] = str(
+                int(self.__dict__['cart'][product_id]['qty']) + int(product_qty))
         self.session.modified = True
-        product_amount = product.amount - product_qty
+        product_amount = product.amount - int(product_qty)
         product.amount = product_amount
         product.save()
