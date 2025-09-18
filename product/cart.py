@@ -25,3 +25,12 @@ class Cart:
         product_amount = product.amount - int(product_qty)
         product.amount = product_amount
         product.save()
+
+    def delete(self, product):
+        product_id = str(product.id)
+        if product_id in self.__dict__['cart']:
+            print(self.__dict__['cart'][product_id]['qty'])
+            product.amount += int(self.__dict__['cart'][product_id]['qty'])
+            product.save()
+            del self.__dict__['cart'][product_id]
+            self.session.modified = True
