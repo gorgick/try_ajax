@@ -33,3 +33,13 @@ def cart_add(request):
 
         response = JsonResponse({'id': product_id, 'product_qty': product_qty, 'product': product.title})
         return response
+
+
+def delete_product(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        product_id = int(request.POST.get('product_id'))
+        product = get_object_or_404(Product, id=product_id)
+        cart.delete(product)
+        response = JsonResponse({'id': product_id})
+        return response
