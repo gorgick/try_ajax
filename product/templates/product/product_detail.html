@@ -22,7 +22,7 @@
                 <li>{{ product.description }}</li>
                 <li>{{ product.price }}</li>
                 <li>{{ product.available }}</li>
-                <li id="pr-amount">{{ product.amount }}</li>
+                <li id="pr-amount" value="{{ product.amount }}">{{ product.amount }}</li>
             </ul>
             <div class="col">
                 <div class="row p-3">
@@ -47,13 +47,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        var select = $('#pr-amount').text()
-        var x = {{ product.amount }}
-        for(var i=1; i<select; i+=1){
-            console.log(i)
-            $('select').append(`<option value="${i}">${i}</option>`);
+        function addOpions(){
+            var select = $('#pr-amount').text()
+            var x = $('#pr-amount').val()
+            for(var i=1; i<select; i+=1){
+                $('select').append(`<option value="${i}">${i}</option>`);
+            };
+            $('select').append(`<option value="${x}">${x}</option>`);
         };
-        $('select').append(`<option value="${x}">${x}</option>`);
+
+        addOpions();
 
 
         $('#add-button').click(function(e){
@@ -69,7 +72,8 @@
                     action: 'post'
                 },
                 success: function (response) {
-                    console.log(response)
+                    addOpions();
+                    location.reload()
                 },
                 error: function (error) {
                     console.log(error)
