@@ -38,4 +38,25 @@
     {% endfor %}
 </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('click', '.delete-button', function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "product:delete-product" %}',
+            data: {
+                product_id: $(this).data('ident'),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(response){
+                console.log(response)
+            },
+            error: function(error, status){
+                console.log(error)
+            }
+        })
+    });
+</script>
 </html>
