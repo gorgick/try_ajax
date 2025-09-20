@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 
 class Cart:
 
@@ -11,6 +13,13 @@ class Cart:
     def __iter__(self):
         for x in self.cart:
             yield self.cart[x]
+
+    def get_price(self):
+        for el in self.__dict__['cart']:
+            print((int(self.__dict__['cart'][el]['qty']) * Decimal(self.__dict__['cart'][el]['price'])))
+            self.__dict__['cart'][el]['sum_for_amount'] = str(
+                int(self.__dict__['cart'][el]['qty']) * Decimal(self.__dict__['cart'][el]['price']))
+        print(self.__dict__['cart'])
 
     def add(self, product, product_qty):
         product_id = str(product.id)
