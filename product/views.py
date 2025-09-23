@@ -18,7 +18,12 @@ def product_detail(request, pk):
 def cart_view(request):
     cart = Cart(request)
     products = Product.objects.all()
-    return render(request, 'product/cart-view.html', {'cart': cart, 'products': products})
+    cart.get_price()
+    context = {
+        'cart': cart,
+        'products': products,
+    }
+    return render(request, 'product/cart-view.html', context)
 
 
 def cart_add(request):
