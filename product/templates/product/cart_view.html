@@ -7,9 +7,8 @@
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-<h1>CART</h1>
-<br>
 <div class="row justify-content-center">
+    <h1 class="text-center">CART</h1>
     {% for item in cart %}
     {% for product in products %}
     {% if product.title == item.title %}
@@ -23,10 +22,11 @@
                     <h5 class="card-title">{{item.title}}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
-                    <ul class="list-group list-group-flush">
+                   <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{item.qty}}</li>
                         <li class="list-group-item">{{item.price}}</li>
-                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">{{product.id}}</li>
+                        <li class="list-group-item">{{item.sum_for_amount}}</li>
                     </ul>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
@@ -36,6 +36,17 @@
     {% endif %}
     {% endfor %}
     {% endfor %}
+</div>
+<hr>
+<div class="container text-center">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+      <h3>Full price</h3>
+    </div>
+    <div class="col col-lg-2">
+      <h3>{{sum_for_all}}</h3>
+    </div>
+  </div>
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
