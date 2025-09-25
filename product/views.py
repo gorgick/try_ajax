@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from decimal import Decimal
 
 from .cart import Cart
 from .models import Product
@@ -19,9 +20,11 @@ def cart_view(request):
     cart = Cart(request)
     products = Product.objects.all()
     cart.get_price()
+    sum_for_all = str(sum([Decimal(el['sum_for_amount']) for el in cart]))
     context = {
         'cart': cart,
         'products': products,
+        'sum_for_all': sum_for_all
     }
     return render(request, 'product/cart-view.html', context)
 
