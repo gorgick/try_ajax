@@ -47,17 +47,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        function addOpions(){
-            var select = $('#pr-amount').text()
-            var x = $('#pr-amount').val()
-            for(var i=1; i<select; i+=1){
-                $('select').append(`<option value="${i}">${i}</option>`);
-            };
-            $('select').append(`<option value="${x}">${x}</option>`);
-        };
-
-        addOpions();
-
 
         $('#add-button').click(function(e){
             e.preventDefault();
@@ -72,7 +61,6 @@
                     action: 'post'
                 },
                 success: function (response) {
-                    addOpions();
                     location.reload()
                 },
                 error: function (error) {
