@@ -10,4 +10,27 @@ $(document).ready(function(){
     };
 
     addOpions();
+
+    $('#add-button').click(function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $('.detail').data('url'),
+            data: {
+                product_id: $(this).val(),
+                product_qty: $('#select option:selected').text(),
+                'csrfmiddlewaretoken': $("[name=csrfmiddlewaretoken]").val(),
+                action: 'post'
+            },
+            success: function (response) {
+                console.log(response)
+                addOpions();
+                location.reload()
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    });
 });
