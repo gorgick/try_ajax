@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,8 @@
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="container detail" data-url="{% url 'product:add-to-cart' %}">
+{% csrf_token %}
     <div class="row justify-content-center">
         <div class="col-12 mt-4 mb-4 text-center">
             <h3>{{product.title}}</h3>
@@ -45,29 +47,5 @@
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-
-        $('#add-button').click(function(e){
-            e.preventDefault();
-
-            $.ajax({
-                type: 'POST',
-                url: '{% url "product:add-to-cart" %}',
-                data: {
-                    product_id: $(this).val(),
-                    product_qty: $('#select option:selected').text(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    action: 'post'
-                },
-                success: function (response) {
-                    location.reload()
-                },
-                error: function (error) {
-                    console.log(error)
-                }
-            })
-        });
-    });
-</script>
+<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 </html>
