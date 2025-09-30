@@ -32,4 +32,24 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('.delete-button').click(function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $('.delete').data('url'),
+            data: {
+                product_id: $(this).data('ident'),
+                'csrfmiddlewaretoken': $("[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function(response){
+                location.reload()
+            },
+            error: function(error, status){
+                console.log(error)
+            }
+        })
+    });
+
 });
