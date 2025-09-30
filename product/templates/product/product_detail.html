@@ -34,7 +34,7 @@
 
                         </select>
                     </div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end"  data-redirect="{% url 'product:cart-view' %}">
                         <button type="button" id="add-button" value="{{product.id}}"
                                 class="btn btn-secondary btn-sm">
                             Add to cart

@@ -24,9 +24,8 @@ $(document).ready(function(){
                 action: 'post'
             },
             success: function (response) {
-                console.log(response)
                 addOpions();
-                location.reload()
+                window.location.href = $('.text-end').data('redirect')
             },
             error: function (error) {
                 console.log(error)
