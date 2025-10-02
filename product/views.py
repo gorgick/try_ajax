@@ -51,3 +51,8 @@ def delete_product(request):
         cart.delete(product)
         response = JsonResponse({'id': product_id})
         return response
+
+
+def gallery(request):
+    images = Product.objects.all().only('image')
+    return render(request, 'product/gallery.html', {'images': images})
