@@ -54,5 +54,5 @@ def delete_product(request):
 
 
 def gallery(request):
-    products = Product.objects.filter(id__lt=5)
+    products = Product.objects.filter(id__lt=5).values('id', 'image')
     return render(request, 'product/gallery.html', {'images': products})
