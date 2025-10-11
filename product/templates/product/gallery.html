@@ -2,22 +2,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <link rel="stylesheet" href="{% static 'css/main.css' %}">
-   <title>Галерея изображений на jQuey</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Галерея изображений на jQuey</title>
 </head>
 <body>
-   <div class="gallery">
-      <div class="big">
-         <img src="{% static 'images/gallery/start.jpg' %}" alt="Старт" />
-      </div>
-      <div class="small">
-          {% for product in images %}
-          <div><a href=""><img class="small-img" src="/media/{{product.image}}" alt=""></a></div>
-          {% endfor %}
-      </div>
-   </div>
+<div class="gallery">
+    <div class="big">
+        <img src="{% static 'images/gallery/start.jpg' %}" alt="Старт"/>
+    </div>
+    <div class="small">
+        {% for product in images %}
+        <div><a id="{{product.id}}" href="/media/{{product.image}}"><img class="small-img"
+                                                                         src="/media/{{product.image}}" alt=""></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.small a').click(function(e){
+            e.preventDefault();
+            if($('.big img').attr('src') != $(this).attr('href')){
+                $('.big img').hide().attr('src', $(this).attr('href')).fadeIn(1000);
+            }
+        })
+    });
+</script>
 </html>
