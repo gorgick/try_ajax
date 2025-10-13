@@ -52,4 +52,12 @@ $(document).ready(function(){
         })
     });
 
+    $('.small a').click(function(e){
+            e.preventDefault();
+            if($('.big img').attr('src') != $(this).attr('href')){
+                $('.big img').hide().attr('src', $(this).attr('href')).fadeIn(1000);
+            }
+        })
+    });
+
 });
