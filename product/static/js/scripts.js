@@ -60,4 +60,13 @@ $(document).ready(function(){
         })
     });
 
+    $('.small a img').click(function(){
+            $('.small a img').fadeTo(500, 1).css({
+                'border': 'none'
+            });
+            $(this).fadeTo(500, 0.6).css({
+                'border': '1px dotted red'
+        })
+    });
+
 });
